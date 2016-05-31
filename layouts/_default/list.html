@@ -27,11 +27,10 @@
 			</a>
 
 			<br>
-			{{ .Summary | markdownify }}
-			
+
 			<hr>
 			{{ end }}
-			
+
 			<aside class="copyright" role="note">
 				{{ with .Site.Params.copyright }}
 				&copy; {{ $.Now.Format "2006" }} {{ . }} &ndash;
