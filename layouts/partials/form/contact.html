@@ -1,0 +1,40 @@
+<style>
+  .form {
+    padding:8pt;border:1px solid #e84e40;border-radius:8pt;
+    display:table;
+    width:100%;
+  }
+  .submit {
+    margin-top: 4pt;
+    padding: 2pt 18pt 2pt 18pt;
+    background-color:#e84e40;
+    color: white;
+  }
+  .formtext {
+    border-bottom: 1px dotted red;
+    display: table-cell;
+    width:100%;
+  }
+  row {
+    display: table-row;
+    width:100%;
+  }
+  label {
+    vertical-align: top;
+    display: table-cell;
+    width:60pt;
+  }
+</style>
+<p>
+<form action="https://formspree.io/victor-form-test@hotmail.com"
+      method="POST" class="form">
+    <row><label>姓名：</label><input type="text" name="name" class="formtext"/></row>
+    <row><label>邮箱：</label><input type="email" name="_replyto" class="formtext"/></row>
+    <row><label>所在省市：</label><input type="text" name="_addr" class="formtext"/></row>
+    <row><label>微信 ID：</label><input type="text" name="weichat" class="formtext"/></row>
+    <row><label>留言：</label><textarea type="text" name="comment" rows=4 class="formtext"/></textarea></row>
+    <row><label></label><input type="submit" value=" 提交 " class="submit"></row>
+    <input type="hidden" name="_next" value="/thanks.html" />
+</form>
+<p>
+<p>
