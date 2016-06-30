@@ -1,4 +1,6 @@
-{{ if .IsPage | and (eq .Type "single" }}
+{{ if .IsPage }}
+{{ if not .Params.nonav }}
+
 {{ if .Prev | or .Next }}
 <nav class="pagination" aria-label="Footer">
   <div class="previous">
@@ -41,6 +43,7 @@
   {{ end }}
   </div>
 </nav>
+{{ end }}
 {{ end }}
 {{ end }}
 
