@@ -1,0 +1,15 @@
+<div class="embed youtube-player">
+<iframe class="youtube-player" id="ifm" type="text/html" height="980" src="https://form.jotform.com/{{ index .Params 0 }}" allowfullscreen frameborder="2">
+</iframe>
+<script>
+  window.onresize = resizeframe;
+  window.onload = resizeframe;
+  function resizeframe() {
+    resizeIframeWidth(document.getElementById('ifm'));
+  }
+  function resizeIframeWidth(e){
+    // console.log(e.parentElement.scrollWidth)
+    e.width = (e.parentElement.scrollWidth) +'px';
+  }
+</script>
+</div>
