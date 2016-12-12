@@ -1,0 +1,60 @@
+{{ partial "head" . }}
+
+{{ if (eq (trim .Site.Params.provider " " | lower) "github") | and (isset .Site.Params "repo_url") }}
+	{{ $repo_id := replace .Site.Params.repo_url "https://github.com/" ""}}
+	{{ .Scratch.Set "repo_id" $repo_id }}
+{{ end }}
+
+<div class="embed itu">
+<iframe id="cookie_itu" type="text/html" height="0" src="https://itu.edu/apply-online-now/?aid=RichardLi&cid=web" frameborder="1">
+</iframe>
+</div>
+
+<div class="backdrop">
+	<div class="backdrop-paper"></div>
+</div>
+
+<input class="toggle" type="checkbox" id="toggle-drawer">
+<input class="toggle" type="checkbox" id="toggle-search">
+<label class="toggle-button overlay" for="toggle-drawer"></label>
+
+<header class="header">
+	{{ partial "header" . }}
+</header>
+
+<main class="main">
+	<div class="drawer">
+		{{ partial "drawer" . }}
+	</div>
+
+	<article class="article">
+		<div class="wrapper">
+      <!-- <p><a class="button button-primary" href="/index.html" role="button">回到首页</a></p> -->
+
+      <p align="center">
+        <a href="/index.html"><img src="/images/goback.png"></a>
+      </p>
+
+			<aside class="copyright" role="note">
+				{{ with .Site.Params.copyright }}
+				&copy; {{ $.Now.Format "2006" }} {{ . }}
+				{{ end }}
+			</aside>
+
+			<footer class="footer">
+				{{ partial "footer" . }}
+			</footer>
+		</div>
+	</article>
+
+	<div class="results" role="status" aria-live="polite">
+		<div class="scrollable">
+			<div class="wrapper">
+				<div class="meta"></div>
+				<div class="list"></div>
+			</div>
+		</div>
+	</div>
+</main>
+
+{{ partial "footer_js" . }}
