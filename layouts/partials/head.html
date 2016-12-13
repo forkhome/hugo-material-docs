@@ -14,6 +14,9 @@
     {{ with .Site.Params.description }}
     <meta name="description" content="{{ . }}">
     {{ end }}
+    {{ with .Site.Params.keywords }}
+    <meta name="keywords" content="{{ range $i, $kw := first 10 . }}{{ if $i }},{{ end }}{{ $kw }}{{ end }}"/>
+    {{ end }}
     <link rel="canonical" href="{{ .Permalink }}">
     {{ with .Site.Params.author }}
     <meta name="author" content="{{ . }}">
