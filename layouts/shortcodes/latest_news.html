@@ -1,0 +1,76 @@
+<div style="clear:both">
+<style>
+  .article_thum {width:50px;height:50px;margin:5px 6px 0px 6px;}
+  .article_title {font-weight:bold;}
+  .article_desc {}
+</style>
+<div id='article_news'></div>
+<div id='article_page' style='text-align:center'></div>
+<script>
+  // get page number from the url
+  var search = window.location.search
+  var npp = 10  // number of articles per page
+  var page = 1
+  if (search != '') {
+    page = parseInt(search.substring(search.indexOf('page=')+5))
+  }
+  if (page < 1) page = 1
+
+  function showResponse(s) {
+    var results = JSON.parse(s).results
+    var html = ''
+    for (var k in results) {
+      var item = '<div>'
+      item += '<div style="float:left">'
+      item += '<a style="border-bottom:0px;" href="' + results[k].origin_url + '">'
+      item += '<img class="article_thum" src="' + results[k].pic + '" /></a>'
+      item += '<div style="text-align:center;line-height:0px;font-size:70%">' + results[k].createdAt.substring(0, 10) + '</div>'
+      item += '</div>'
+
+      item += '<div>'
+      item += '<a href="' + results[k].origin_url + '">'
+      item += '<div class="article_title">' + results[k].title + '</div></a>'
+      item += '<div class="article_desc">' + results[k].desc + '</div>'
+      item += '</div>'
+
+      item += '</div>'
+      item += '<hr style="clear:both;margin:6px;" />'
+
+      html += item
+    }
+    document.getElementById('article_news').innerHTML = html
+
+    // set prev/next page
+    var prevpage = window.location.pathname + '?page=' + (page - 1)
+    var nextpage = window.location.pathname + '?page=' + (page + 1)
+    var pagehtml = ''
+    if (page > 1) {
+      pagehtml = '<a href="' + prevpage + '">PREV</a>.........'
+    }
+    if (results.length >= npp) {
+      pagehtml += '<a href="' + nextpage + '">NEXT</a>'
+    }
+    document.getElementById('article_page').innerHTML = pagehtml
+  }
+
+  var url = 'https://us-api.leancloud.cn/1.1/classes/Article'
+  url += '?limit=' + npp + '&skip=' + (npp * (page - 1)) + '&order=-createdAt'
+
+  var async = true // false for synchronous request
+  var xmlHttp = new XMLHttpRequest();
+  xmlHttp.open( 'GET', url, async );
+  xmlHttp.setRequestHeader('X-LC-Id', '0vFebJwhc1yzru6lgNOhTxQf-MdYXbMMI');
+  xmlHttp.setRequestHeader('X-LC-Key', '6CVaVCqbPCuAvFPazVkPEGXM');
+  //xmlHttp.setRequestHeader('Accept', 'application/json')
+  xmlHttp.send( null );
+  if (async) {
+    xmlHttp.onreadystatechange = function(e) {
+      if (this.readyState === 4 && this.status == 200) {
+        showResponse(xmlHttp.responseText)
+      }
+    }
+  } else {
+    showResponse(xmlHttp.responseText);
+  }
+</script>
+</div>
